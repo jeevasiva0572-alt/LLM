@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatbot Data Filter</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #4a90e2, #f8fbff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h2 {
+      margin-top: 40px;
+      color: #fff;
+      text-shadow: 1px 1px 2px #00000033;
+    }
+
+    #chatBox {
+      width: 400px;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    #btn {
+      padding: 12px 24px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 10px;
+      transition: background 0.3s ease;
+    }
+
+    #btn:hover {
+      background: #135ba1;
+    }
+
+    table {
+      width: 90%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 20px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background: #1976d2;
+      color: white;
+      position: sticky;
+      top: 0;
+    }
+
+    tr:nth-child(even) {
+      background: #f2f6fc;
+    }
+
+    .input-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Chatbot Data Filter</h2>
+
+<div class="input-container">
+  <input id="chatBox" placeholder="Type your question…" />
+  <button id="btn">Search</button>
+</div>
+
+<table id="resultTable">
+  <thead></thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  document.getElementById("btn").onclick = async () => {
+    const query = document.getElementById("chatBox").value.trim();
+    if (!query) return alert("Please type a query!");
+
+    const res = await fetch("http://localhost:5000/filter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query })
+    });
+
+    const data = await res.json();
+    const thead = document.querySelector("#resultTable thead");
+    const tbody = document.querySelector("#resultTable tbody");
+
+    thead.innerHTML = "";
+    tbody.innerHTML = "";
+
+    if (data.length === 0) {
+      thead.innerHTML = "<tr><th>No Data Found</th></tr>";
+      return;
+    }
+
+    const headers = Object.keys(data[0]);
+    thead.innerHTML = `<tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr>`;
+
+    data.forEach(row => {
+      tbody.innerHTML += `
+        <tr>
+          ${headers.map(h => `<td>${row[h]}</td>`).join("")}
+        </tr>`;
+    });
+  };
+</script>
+
+</body>
+</html>

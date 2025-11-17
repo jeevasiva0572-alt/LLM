@@ -1,0 +1,110 @@
+/* ----- Page Background ----- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #6fb1fc, #4364f7);
+  min-height: 100vh;
+}
+
+/* ----- Header Title ----- */
+.title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  margin-top: 25px;
+  letter-spacing: 1px;
+}
+
+/* ----- Search Area ----- */
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 30px;
+}
+
+.search-box {
+  width: 45%;
+  height: 45px;
+  border: none;
+  outline: none;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 17px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.search-btn {
+  margin-left: 12px;
+  padding: 11px 25px;
+  font-size: 17px;
+  color: white;
+  background: #006ae0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease-in-out;
+}
+
+.search-btn:hover {
+  background: #004fa8;
+  transform: translateY(-2px);
+}
+
+/* ----- Table Container Card ----- */
+.table-wrapper {
+  width: 90%;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ----- Table Styling ----- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+thead {
+  background: #006ae0;
+  color: white;
+}
+
+thead th {
+  padding: 12px;
+  text-align: left;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+tbody tr {
+  border-bottom: 1px solid #dcdcdc;
+  transition: 0.2s ease;
+}
+
+tbody tr:hover {
+  background: #f3f7ff;
+  transform: scale(1.01);
+}
+
+tbody td {
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Small rounded corners for first & last header cell */
+thead th:first-child {
+  border-top-left-radius: 10px;
+}
+
+thead th:last-child {
+  border-top-right-radius: 10px;
+}
+
